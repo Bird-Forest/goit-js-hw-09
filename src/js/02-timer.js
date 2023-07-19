@@ -85,26 +85,19 @@ flatpickr(myInput, options, {
 // })
 
 
-
-
-
-
-
-
-
 // const todayDate = Date.now();
 // console.log(todayDate)
 // const userDate = onClose(selectedDates);
 // console.log(userDate);
 
 
-const nowDay = new Date();
-// console.dir(nowDay);
-console.log(nowDay.getTime());
-const dateUser = new Date('4/11/2023');
-console.log(dateUser.getTime());
-let result = dateUser - nowDay;
-setInterval
+// const nowDay = new Date();
+// // console.dir(nowDay);
+// console.log(nowDay.getTime());
+// const dateUser = new Date('4/11/2023');
+// console.log(dateUser.getTime());
+// let result = dateUser - nowDay;
+// setInterval
 
 
 
@@ -123,9 +116,9 @@ setInterval
 //   dateFormat: "YYYY-MM-DD",
 //   altFormat: "DD-MM-YYYY",
 //   allowInput: true,
-  parseDate: (datestr, format) => {
-    return moment(datestr, format, true).toDate();
-  },
+  // parseDate: (datestr, format) => {
+  //   return moment(datestr, format, true).toDate();
+  // },
 //   formatDate: (date, format, locale) => {
 //     // locale can also be used
 //     return moment(date).format(format);
@@ -138,36 +131,36 @@ setInterval
 
 
 
-arrDay = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четверг', 'П`ятниця', 'Суббота'];
+// arrDay = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четверг', 'П`ятниця', 'Суббота'];
 
 
-const day = document.querySelector('span[data-days]');
-const hour = document.querySelector('span[data-hours]')
-const minute = document.querySelector('span[data-minutes]')
-const second = document.querySelector('span[data-seconds]')
+// const day = document.querySelector('span[data-days]');
+// const hour = document.querySelector('span[data-hours]')
+// const minute = document.querySelector('span[data-minutes]')
+// const second = document.querySelector('span[data-seconds]')
 
-setInterval(() => {
-    const date = new Date();
-    const dateDay = arrDay[date.getDay()];
-    const dateHour = date.getHours();
-    const dateMinute = date.getMinutes();
-    const dateSecond = date.getSeconds();
+// setInterval(() => {
+//     const date = new Date();
+//     const dateDay = arrDay[date.getDay()];
+//     const dateHour = date.getHours();
+//     const dateMinute = date.getMinutes();
+//     const dateSecond = date.getSeconds();
 
-    day.textContent = dateDay;
-    hour.textContent = dateHour;
-    minute.textContent = dateMinute;
-    second.textContent = dateSecond;
-}, 1000);
+//     day.textContent = dateDay;
+//     hour.textContent = dateHour;
+//     minute.textContent = dateMinute;
+//     second.textContent = dateSecond;
+// }, 1000);
 
-const date = new Date();
-    const dateDay = arrDay[date.getDay()];
-    const dateHour = date.getHours();
-    const dateMinute = date.getMinutes();
-    const dateSecond = date.getSeconds();
-day.textContent = dateDay;
-hour.textContent = dateHour;
-minute.textContent = dateMinute;
-second.textContent = dateSecond;
+// const date = new Date();
+//     const dateDay = arrDay[date.getDay()];
+//     const dateHour = date.getHours();
+//     const dateMinute = date.getMinutes();
+//     const dateSecond = date.getSeconds();
+// day.textContent = dateDay;
+// hour.textContent = dateHour;
+// minute.textContent = dateMinute;
+// second.textContent = dateSecond;
 
 
 
