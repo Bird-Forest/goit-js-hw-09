@@ -6,7 +6,9 @@ const startBtn = document.querySelector('button[data-start]');
 const stopBtn = document.querySelector('button[data-stop]');
 document.querySelector('button[data-stop]').disabled = true;
 
-startBtn.addEventListener("click", (timerId) => {
+let timerId = null;
+
+startBtn.addEventListener("click", () => {
     timerId = setInterval(() => {
         document.body.style.background = getRandomHexColor();
     }, 1000,
