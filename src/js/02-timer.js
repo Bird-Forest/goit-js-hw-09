@@ -1,37 +1,113 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 require("flatpickr/dist/themes/material_green.css");
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
-const myInput = document.querySelector("#datetime-picker");
-myInput.addEventListener('input', flatpickr)
+// const box = document.querySelector('.timer')
+const myInput = document.querySelector('#datetime-picker');
+console.dir(myInput);
+const btnStart = document.querySelector('button[data-start]');
 
-const todayDate = Date.now();
-console.log(todayDate)
-let userDate = 1;
-console.log(userDate);
+const daysRest = document.querySelector('span[data-days]').textContent;
+console.dir(daysRest);
+const hoursRest = document.querySelector('span[data-hours]').textContent;
+const minutesRest = document.querySelector('span[data-minutes]').textContent;
+const secondsRest = document.querySelector('span[data-seconds]').textContent;
+btnStart.disabled = true;
+
+
+btnStart.addEventListener('click', onTimer)
 
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+  timeSecond: Date.now(),
   onClose(selectedDates) {
-    selectedDates = selectedDates[0].getTime();
-      if (selectedDates < Date.now()) {
-      return Report.failure('УВАГА',
-        'Обери дату та час у майбутньому',
-        'Зрозуміло',
+    let user = selectedDates[0].getTime();
+    if (user < Date.now()) {
+    return Report.failure('УВАГА',
+      'Обери дату та час у майбутньому',
+      'Зрозуміло',
       );
-    };
-    console.log(selectedDates)
+    }
+    btnStart.disabled = false;
   },
 };
 
-flatpickr(myInput, options, {
- 
-});
+flatpickr(myInput, options);
+
+  const todayDate = new Date;
+  console.log(todayDate);
+  
+  
+  // const ms = waitDate - todayDate;
+  // console.log(ms)
+
+function convertMs() {
+  const waitDate = new Date(myInput.currentTarget.value);
+  console.log(waitDate);
+  let todayDate = new Date;
+  let diff = waitDate - todayDate
+
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+
+    const days = addZero(Math.floor(diff / day));
+    const hours = addZero(Math.floor((diff % day) / hour));
+    const minutes = addZero(Math.floor(((diff % day) % hour) / minute));
+    const seconds = addZero(Math.floor((((diff % day) % hour) % minute) / second));
+
+  daysRest = days;
+  hoursRest = hours;
+  minutesRest = minutes;
+  secondsRest = seconds;
+};
+
+const addZero = (value) => {
+  return String(value).padStart(2, 0);
+};
+  myInput.addEventListener('input', convertMs);
+
+let timerId = 0;
+function onTimer() {
+  timerId = setInterval(convertMs, 1000, btnStart.disabled = true);
+  if (diff <= 0) {
+    clearInterval(timerId)
+  }
+};
+
+clearInterval(timerId);
+
+  
+
+
+  
+  
+    
+
+//     myInput.addEventListener('input', convertMs);
+// let timerId = 0;
+// btnStart.addEventListener("click", () => {
+//   timerId = setInterval(() => {
+    
+//   }, 1000);
+// });
+
+// const timerID = setInterval(onWait, 1000);
+// btnStart.addEventListener("click", (onWait) => {
+//   timerId = setInterval(onWait, 1000);
+// });
+
+
+// stopBtn.addEventListener("click", () => {
+//   clearInterval(timerId);
+//   console.log(`Interval with id ${timerId} has stopped!`);
+// });
 
 
 
@@ -65,30 +141,8 @@ flatpickr(myInput, options, {
 
 
 
-// flatpickr( myInput, {
-//   defaultDate: new Date(),
-//   enableTime: true,
-//   time_24hr: true,
-//   minuteIncrement: 1,
-
-//     onClose(selectedDates) {
-//     minDate = Date.now();
-//     if (selectedDates[0].getTime() < Date.now()) {
-//       Report.failure('УВАГА',
-//         'Обери дату та час у майбутньому',
-//         'Зрозуміло',
-//       );
-//     } 
-//     return userDate = selectedDates[0].getTime();
-//   },
-   
-// })
 
 
-// const todayDate = Date.now();
-// console.log(todayDate)
-// const userDate = onClose(selectedDates);
-// console.log(userDate);
 
 
 // const nowDay = new Date();
@@ -99,40 +153,7 @@ flatpickr(myInput, options, {
 // let result = dateUser - nowDay;
 // setInterval
 
-
-
-
-
-// Report.failure(
-// 'УВАГА',
-// '"Обери дату та час у майбутньому"',
-// 'Зрозуміло',
-// );
-
-
-
-
-//   altInput: true,
-//   dateFormat: "YYYY-MM-DD",
-//   altFormat: "DD-MM-YYYY",
-//   allowInput: true,
-  // parseDate: (datestr, format) => {
-  //   return moment(datestr, format, true).toDate();
-  // },
-//   formatDate: (date, format, locale) => {
-//     // locale can also be used
-//     return moment(date).format(format);
-//   }
-
-
-
-
-
-
-
-
 // arrDay = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четверг', 'П`ятниця', 'Суббота'];
-
 
 // const day = document.querySelector('span[data-days]');
 // const hour = document.querySelector('span[data-hours]')
