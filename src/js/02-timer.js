@@ -1,36 +1,29 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 require("flatpickr/dist/themes/material_green.css");
-// import Notiflix from 'notiflix';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
-// const box = document.querySelector('.timer')
 const myInput = document.querySelector('#datetime-picker');
-console.dir(myInput);
+console.dir(myInput)
+const days = document.querySelector('span[data-days]');
+const hours = document.querySelector('span[data-hours]');
+const minutes = document.querySelector('span[data-minutes]');
+const seconds = document.querySelector('span[data-seconds]');
 const btnStart = document.querySelector('button[data-start]');
-
-const daysRest = document.querySelector('span[data-days]').textContent;
-console.dir(daysRest);
-const hoursRest = document.querySelector('span[data-hours]').textContent;
-const minutesRest = document.querySelector('span[data-minutes]').textContent;
-const secondsRest = document.querySelector('span[data-seconds]').textContent;
 btnStart.disabled = true;
 
-
-btnStart.addEventListener('click', onTimer)
 
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  timeSecond: Date.now(),
   onClose(selectedDates) {
     let user = selectedDates[0].getTime();
     if (user < Date.now()) {
     return Report.failure('УВАГА',
       'Обери дату та час у майбутньому',
-      'Зрозуміло',
+      'Ok',
       );
     }
     btnStart.disabled = false;
@@ -39,56 +32,66 @@ const options = {
 
 flatpickr(myInput, options);
 
-  const todayDate = new Date;
-  console.log(todayDate);
-  
-  
-  // const ms = waitDate - todayDate;
-  // console.log(ms)
+// btnStart.addEventListener('click', convertMs)
+myInput.addEventListener('input', convertMs);
 
-function convertMs() {
-  const waitDate = new Date(myInput.currentTarget.value);
-  console.log(waitDate);
-  let todayDate = new Date;
-  let diff = waitDate - todayDate
+function convertMs(evt) {
+  const date = evt.currentTarget.value;
+  const waitDate = Date.parse(date)
 
+  let timerId = 0;
+
+  timerId = setInterval(() => {
+    const todayDate = Date.now() ;
+    let diff = waitDate - todayDate;
+    console.log(diff)
+    
     const second = 1000;
     const minute = second * 60;
     const hour = minute * 60;
     const day = hour * 24;
+  
+    const addZero = (value) => {
+    return String(value).padStart(2, 0);
+    };
 
-    const days = addZero(Math.floor(diff / day));
-    const hours = addZero(Math.floor((diff % day) / hour));
-    const minutes = addZero(Math.floor(((diff % day) % hour) / minute));
-    const seconds = addZero(Math.floor((((diff % day) % hour) % minute) / second));
+    const daysRest = addZero(Math.floor(diff / day));
+    const hoursRest = addZero(Math.floor((diff % day) / hour));
+    const minutesRest = addZero(Math.floor(((diff % day) % hour) / minute));
+    const secondsRest = addZero(Math.floor((((diff % day) % hour) % minute) / second));
 
-  daysRest = days;
-  hoursRest = hours;
-  minutesRest = minutes;
-  secondsRest = seconds;
+  days.textContent = daysRest;
+  hours.textContent = hoursRest;
+  minutes.textContent = minutesRest;
+  seconds.textContent = secondsRest;
+
+    if (diff < 1000) {
+      clearInterval(timerId)
+    }
+  }, 1000);
 };
 
-const addZero = (value) => {
-  return String(value).padStart(2, 0);
-};
-  myInput.addEventListener('input', convertMs);
-
-let timerId = 0;
-function onTimer() {
-  timerId = setInterval(convertMs, 1000, btnStart.disabled = true);
-  if (diff <= 0) {
-    clearInterval(timerId)
-  }
-};
-
-clearInterval(timerId);
-
-  
 
 
-  
-  
-    
+
+
+
+// btnStart.addEventListener('click', onTimer)
+// function onTimer() {
+//   convertMs()
+//   btnStart.disabled = true
+// };
+
+// let timerId = 0;
+
+ 
+//   timerId = setInterval(convertMs, 1000, btnStart.disabled = true);
+//   if (diff <= 0) {
+//     clearInterval(timerId)
+//   }
+
+
+
 
 //     myInput.addEventListener('input', convertMs);
 // let timerId = 0;
