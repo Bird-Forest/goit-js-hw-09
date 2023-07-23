@@ -17,31 +17,6 @@ img {
   max-width: 100%;
 }
 
-input {
-  width: 390px;
-  height: 50px;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 24px;
-  margin-right: 5px;
-  border: 5px #ffd350 solid;
-  border-radius: 5px;
-}
-
-button {
-  width: 200px;
-  height: 50px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 24px;
-  color: rgba(244, 55, 17, 0.942);
-  background-color: rgb(77, 229, 240);
-  border: 5px #ffd350 solid;
-  border-radius: 5px;
-  margin-bottom: 0;
-}
-
 .timer {
   display: flex;
   flex-direction: row;

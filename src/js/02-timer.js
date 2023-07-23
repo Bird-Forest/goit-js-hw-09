@@ -12,35 +12,41 @@ const seconds = document.querySelector('span[data-seconds]');
 const btnStart = document.querySelector('button[data-start]');
 btnStart.disabled = true;
 
+let waitDate = null;
 
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-    let user = selectedDates[0].getTime();
-    if (user < Date.now()) {
-    return Report.failure('УВАГА',
-      'Обери дату та час у майбутньому',
-      'Ok',
-      );
-    }
-    btnStart.disabled = false;
+
+  onClose (selectedDates) {
+    waitDate = Date.parse(selectedDates[0])
+    if (waitDate < Date.now()) {
+      btnStart.disabled = true;
+      btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
+        return Report.failure('Ooops...',
+        'Please choose a date in the future',
+        'Ok',
+      ); 
+    } else {
+      btnStart.disabled = false;
+      btnStart.style.backgroundColor = 'rgb(30, 191, 203)';
+    };
+    console.log(waitDate)
   },
 };
 
 flatpickr(myInput, options);
+myInput.addEventListener('input', options.onClose);
 
-// btnStart.addEventListener('click', convertMs)
-myInput.addEventListener('input', convertMs);
+btnStart.addEventListener('click', convertMs)
 
-function convertMs(evt) {
-  const date = evt.currentTarget.value;
-  const waitDate = Date.parse(date)
+function convertMs() {
+  btnStart.disabled = true;
+  btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
 
   let timerId = 0;
-
   timerId = setInterval(() => {
     const todayDate = Date.now() ;
     let diff = waitDate - todayDate;
@@ -60,10 +66,10 @@ function convertMs(evt) {
     const minutesRest = addZero(Math.floor(((diff % day) % hour) / minute));
     const secondsRest = addZero(Math.floor((((diff % day) % hour) % minute) / second));
 
-  days.textContent = daysRest;
-  hours.textContent = hoursRest;
-  minutes.textContent = minutesRest;
-  seconds.textContent = secondsRest;
+    days.textContent = daysRest;
+    hours.textContent = hoursRest;
+    minutes.textContent = minutesRest;
+    seconds.textContent = secondsRest;
 
     if (diff < 1000) {
       clearInterval(timerId)
@@ -71,49 +77,28 @@ function convertMs(evt) {
   }, 1000);
 };
 
+myInput.style.width = `${395}px`;
+myInput.style.height = `${50}px`;
+myInput.style.fontWeight = '700';
+myInput.style.fontStyle = 'normal';
+myInput.style.fontSize = `${24}px`;
+myInput.style.border = `${5}px`;
+myInput.style.borderColor = 'rgb(255, 211, 80)';
+myInput.style.borderRadius = `${5}px`;
+myInput.style.borderStyle = 'solid';
 
-
-
-
-
-// btnStart.addEventListener('click', onTimer)
-// function onTimer() {
-//   convertMs()
-//   btnStart.disabled = true
-// };
-
-// let timerId = 0;
-
- 
-//   timerId = setInterval(convertMs, 1000, btnStart.disabled = true);
-//   if (diff <= 0) {
-//     clearInterval(timerId)
-//   }
-
-
-
-
-//     myInput.addEventListener('input', convertMs);
-// let timerId = 0;
-// btnStart.addEventListener("click", () => {
-//   timerId = setInterval(() => {
-    
-//   }, 1000);
-// });
-
-// const timerID = setInterval(onWait, 1000);
-// btnStart.addEventListener("click", (onWait) => {
-//   timerId = setInterval(onWait, 1000);
-// });
-
-
-// stopBtn.addEventListener("click", () => {
-//   clearInterval(timerId);
-//   console.log(`Interval with id ${timerId} has stopped!`);
-// });
-
-
-
+btnStart.style.width =`${200}px`;
+btnStart.style.height = `${50}px`;
+btnStart.style.fontFamily = 'Roboto';
+btnStart.style.fontWeight = '700';
+btnStart.style.fontStyle = 'normal';
+btnStart.style.fontSize = `${24}px`;
+btnStart.style.color = 'rgba(244, 55, 17, 0.942)';
+btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
+btnStart.style.border = `${5}px`;
+btnStart.style.borderColor = "rgb(255, 211, 80)";
+btnStart.style.borderRadius = `${5}px`;
+btnStart.style.borderStyle = 'solid';
 
 
 
