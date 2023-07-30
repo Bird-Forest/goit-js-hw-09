@@ -87,7 +87,13 @@ function convertMs() {
 
 function onReset() {
   myInput.disabled = false;
+  btnStart.disabled = true;
   myInput.textContent = new Date();
+
+  days.textContent = 0;
+  hours.textContent = 0;
+  minutes.textContent = 0;
+  seconds.textContent = 0;
 };
 
 
