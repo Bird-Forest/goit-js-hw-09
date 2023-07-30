@@ -16,6 +16,9 @@ btnStart.after(btnReset);
 btnReset.disabled = true;
 
 let waitDate = null;
+const todayDate = Date.now() ;
+    let diff = waitDate - todayDate;
+    console.log(diff)
 
 const options = {
   enableTime: true,
@@ -48,17 +51,18 @@ btnStart.addEventListener('click', convertMs)
 btnReset.addEventListener('click', onReset)
 
 function convertMs() {
- 
+  myInput.disabled = true;
   btnReset.disabled = false;
   btnReset.style.backgroundColor = 'rgb(30, 191, 203)';
   btnStart.disabled = true;
   btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
 
+
   let timerId = 0;
   timerId = setInterval(() => {
-    const todayDate = Date.now() ;
-    let diff = waitDate - todayDate;
-    console.log(diff)
+    // const todayDate = Date.now() ;
+    // let diff = waitDate - todayDate;
+    // console.log(diff)
     
     const second = 1000;
     const minute = second * 60;
@@ -89,6 +93,8 @@ function onReset() {
   myInput.disabled = false;
   btnStart.disabled = true;
   myInput.textContent = new Date();
+
+  diff = 0;
 
   days.textContent = 0;
   hours.textContent = 0;
