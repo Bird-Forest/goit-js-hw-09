@@ -12,8 +12,9 @@ const seconds = document.querySelector('span[data-seconds]');
 const btnStart = document.querySelector('button[data-start]');
 btnStart.disabled = true;
 const timer = document.querySelector('.timer');
+console.log(timer);
 const btnReset = document.createElement('button');
-btnStart.insertAdjacentHTML("afterend", btnReset);
+btnStart.after(btnReset);
 btnReset.disabled = true;
 
 console.log(btnReset)
