@@ -57,7 +57,6 @@ function convertMs() {
   btnStart.disabled = true;
   btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
 
-
   let timerId = 0;
   timerId = setInterval(() => {
     // const todayDate = Date.now() ;
@@ -92,14 +91,15 @@ function convertMs() {
 function onReset() {
   myInput.disabled = false;
   btnStart.disabled = true;
+  btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
   myInput.textContent = new Date();
 
-  diff = 0;
-
-  days.textContent = 0;
-  hours.textContent = 0;
-  minutes.textContent = 0;
-  seconds.textContent = 0;
+  days.textContent = '00';
+  hours.textContent = '00';
+  minutes.textContent = '00';
+  seconds.textContent = '00';
+  
+  clearInterval(timerId);
 };
 
 
