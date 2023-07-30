@@ -11,13 +11,9 @@ const minutes = document.querySelector('span[data-minutes]');
 const seconds = document.querySelector('span[data-seconds]');
 const btnStart = document.querySelector('button[data-start]');
 btnStart.disabled = true;
-const timer = document.querySelector('.timer');
-console.log(timer);
 const btnReset = document.createElement('button');
 btnStart.after(btnReset);
 btnReset.disabled = true;
-
-console.log(btnReset)
 
 let waitDate = null;
 
@@ -53,6 +49,7 @@ btnReset.addEventListener('click', onReset)
 function convertMs() {
   myInput.disabled = true;
   btnReset.disabled = false;
+  btnReset.style.backgroundColor = 'rgb(30, 191, 203)';
   btnStart.disabled = true;
   btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
 
