@@ -4,13 +4,19 @@ require("flatpickr/dist/themes/material_green.css");
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const myInput = document.querySelector('#datetime-picker');
-console.dir(myInput)
+console.dir(myInput);
 const days = document.querySelector('span[data-days]');
 const hours = document.querySelector('span[data-hours]');
 const minutes = document.querySelector('span[data-minutes]');
 const seconds = document.querySelector('span[data-seconds]');
 const btnStart = document.querySelector('button[data-start]');
 btnStart.disabled = true;
+const timer = document.querySelector('.timer');
+const btnReset = document.createElement('button');
+btnStart.insertAdjacentHTML("afterend", btnReset);
+btnReset.disabled = true;
+
+console.log(btnReset)
 
 let waitDate = null;
 
@@ -41,8 +47,11 @@ flatpickr(myInput, options);
 myInput.addEventListener('input', options.onClose);
 
 btnStart.addEventListener('click', convertMs)
+btnReset.addEventListener('click', onReset)
 
 function convertMs() {
+  myInput.disabled = true;
+  btnReset.disabled = false;
   btnStart.disabled = true;
   btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
 
@@ -77,7 +86,13 @@ function convertMs() {
   }, 1000);
 };
 
-myInput.style.width = `${395}px`;
+function onReset() {
+  myInput.disabled = false;
+  myInput.textContent = new Date();
+}
+
+
+myInput.style.width = `${295}px`;
 myInput.style.height = `${50}px`;
 myInput.style.fontWeight = '700';
 myInput.style.fontStyle = 'normal';
@@ -87,7 +102,7 @@ myInput.style.borderColor = 'rgb(255, 211, 80)';
 myInput.style.borderRadius = `${5}px`;
 myInput.style.borderStyle = 'solid';
 
-btnStart.style.width =`${200}px`;
+btnStart.style.width =`${150}px`;
 btnStart.style.height = `${50}px`;
 btnStart.style.fontFamily = 'Roboto';
 btnStart.style.fontWeight = '700';
@@ -100,6 +115,19 @@ btnStart.style.borderColor = "rgb(255, 211, 80)";
 btnStart.style.borderRadius = `${5}px`;
 btnStart.style.borderStyle = 'solid';
 
+btnReset.textContent = "Reset";
+btnReset.style.width =`${150}px`;
+btnReset.style.height = `${50}px`;
+btnReset.style.fontFamily = 'Roboto';
+btnReset.style.fontWeight = '700';
+btnReset.style.fontStyle = 'normal';
+btnReset.style.fontSize = `${24}px`;
+btnReset.style.color = 'rgba(244, 55, 17, 0.942)';
+btnReset.style.backgroundColor = 'rgb(148, 233, 239)';
+btnReset.style.border = `${5}px`;
+btnReset.style.borderColor = "rgb(255, 211, 80)";
+btnReset.style.borderRadius = `${5}px`;
+btnReset.style.borderStyle = 'solid';
 
 
 
