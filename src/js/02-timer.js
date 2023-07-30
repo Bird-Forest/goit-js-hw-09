@@ -35,6 +35,7 @@ const options = {
     } else {
       btnStart.disabled = false;
       btnStart.style.backgroundColor = 'rgb(30, 191, 203)';
+      myInput.disabled = true;
     };
     console.log(waitDate)
   },
@@ -47,7 +48,7 @@ btnStart.addEventListener('click', convertMs)
 btnReset.addEventListener('click', onReset)
 
 function convertMs() {
-  myInput.disabled = true;
+ 
   btnReset.disabled = false;
   btnReset.style.backgroundColor = 'rgb(30, 191, 203)';
   btnStart.disabled = true;
@@ -87,7 +88,7 @@ function convertMs() {
 function onReset() {
   myInput.disabled = false;
   myInput.textContent = new Date();
-}
+};
 
 
 myInput.style.width = `${295}px`;
