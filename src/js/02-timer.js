@@ -16,9 +16,6 @@ btnStart.after(btnReset);
 btnReset.disabled = true;
 
 let waitDate = null;
-// const todayDate = Date.now() ;
-//     let diff = waitDate - todayDate;
-//     console.log(diff)
 
 const options = {
   enableTime: true,
@@ -49,104 +46,61 @@ const options = {
 flatpickr(myInput, options);
 myInput.addEventListener('input', options.onClose);
 
-btnStart.addEventListener('click', convertMs)
-btnReset.addEventListener('click', onReset)
-
 let timerId = 0;
-// function convertMs() {
-//   myInput.disabled = true;
+btnStart.addEventListener('click', () => {
+  timerId = setInterval(() => {
+    myInput.disabled = true;
 
-//   btnReset.disabled = false;
-//   btnReset.style.backgroundColor = 'rgb(30, 191, 203)';
+    btnReset.disabled = false;
+    btnReset.style.backgroundColor = 'rgb(30, 191, 203)';
 
-//   btnStart.disabled = true;
-//   btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
+    btnStart.disabled = true;
+    btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
 
-//   // let timerId = 0;
-//   timerId = setInterval(() => {
-//     const todayDate = Date.now() ;
-//     let diff = waitDate - todayDate;
-//     console.log(diff)
+    const todayDate = Date.now();
+    let diff = waitDate - todayDate;
+    console.log(diff)
     
-//     const second = 1000;
-//     const minute = second * 60;
-//     const hour = minute * 60;
-//     const day = hour * 24;
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
   
-//     const addZero = (value) => {
-//     return String(value).padStart(2, 0);
-//     };
+    const addZero = (value) => {
+      return String(value).padStart(2, 0);
+    };
 
-//     const daysRest = addZero(Math.floor(diff / day));
-//     const hoursRest = addZero(Math.floor((diff % day) / hour));
-//     const minutesRest = addZero(Math.floor(((diff % day) % hour) / minute));
-//     const secondsRest = addZero(Math.floor((((diff % day) % hour) % minute) / second));
+    const daysRest = addZero(Math.floor(diff / day));
+    const hoursRest = addZero(Math.floor((diff % day) / hour));
+    const minutesRest = addZero(Math.floor(((diff % day) % hour) / minute));
+    const secondsRest = addZero(Math.floor((((diff % day) % hour) % minute) / second));
 
-//     days.textContent = daysRest;
-//     hours.textContent = hoursRest;
-//     minutes.textContent = minutesRest;
-//     seconds.textContent = secondsRest;
+    days.textContent = daysRest;
+    hours.textContent = hoursRest;
+    minutes.textContent = minutesRest;
+    seconds.textContent = secondsRest;
 
-//     if (diff < 1000) {
-//       clearInterval(timerId)
-//     }
-//   }, 1000);
-// };
+    if (diff < 1000) {
+      clearInterval(timerId)
+    }
+  }, 1000);
 
-timerId = setInterval(() => {
-  myInput.disabled = true;
+});
 
-  btnReset.disabled = false;
-  btnReset.style.backgroundColor = 'rgb(30, 191, 203)';
-
-  btnStart.disabled = true;
-  btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
-  
-  const todayDate = Date.now();
-  let diff = waitDate - todayDate;
-  console.log(diff)
-    
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
-  
-  const addZero = (value) => {
-    return String(value).padStart(2, 0);
-  };
-
-  const daysRest = addZero(Math.floor(diff / day));
-  const hoursRest = addZero(Math.floor((diff % day) / hour));
-  const minutesRest = addZero(Math.floor(((diff % day) % hour) / minute));
-  const secondsRest = addZero(Math.floor((((diff % day) % hour) % minute) / second));
-
-  days.textContent = daysRest;
-  hours.textContent = hoursRest;
-  minutes.textContent = minutesRest;
-  seconds.textContent = secondsRest;
-
-  if (diff < 1000) {
-    clearInterval(timerId)
-  }
-}, 1000);
-
-function onReset() {
+btnReset.addEventListener("click", () => {
+  clearInterval(timerId)
   myInput.disabled = false;
-  btnStart.disabled = true;
-  btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
-  // myInput.textContent = new Date();
 
   days.textContent = '00';
   hours.textContent = '00';
   minutes.textContent = '00';
   seconds.textContent = '00';
-  
-  clearInterval(timerId);
 
   btnStart.disabled = true;
   btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
-};
-
+  btnReset.disabled = true;
+  btnReset.style.backgroundColor = 'rgb(148, 233, 239)';
+});
 
 myInput.style.width = `${295}px`;
 myInput.style.height = `${50}px`;
@@ -195,9 +149,66 @@ btnReset.style.borderStyle = 'solid';
 
 
 
+// btnStart.addEventListener('click', timerId)
+// btnReset.addEventListener('click', onReset)
 
+// let timerId = 0;
+// function convertMs() {
+//   myInput.disabled = true;
 
+//   btnReset.disabled = false;
+//   btnReset.style.backgroundColor = 'rgb(30, 191, 203)';
 
+//   btnStart.disabled = true;
+//   btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
+
+//   // let timerId = 0;
+//   timerId = setInterval(() => {
+//     const todayDate = Date.now() ;
+//     let diff = waitDate - todayDate;
+//     console.log(diff)
+    
+//     const second = 1000;
+//     const minute = second * 60;
+//     const hour = minute * 60;
+//     const day = hour * 24;
+  
+//     const addZero = (value) => {
+//     return String(value).padStart(2, 0);
+//     };
+
+//     const daysRest = addZero(Math.floor(diff / day));
+//     const hoursRest = addZero(Math.floor((diff % day) / hour));
+//     const minutesRest = addZero(Math.floor(((diff % day) % hour) / minute));
+//     const secondsRest = addZero(Math.floor((((diff % day) % hour) % minute) / second));
+
+//     days.textContent = daysRest;
+//     hours.textContent = hoursRest;
+//     minutes.textContent = minutesRest;
+//     seconds.textContent = secondsRest;
+
+//     if (diff < 1000) {
+//       clearInterval(timerId)
+//     }
+//   }, 1000);
+// };
+
+// function onReset() {
+//   myInput.disabled = false;
+//   btnStart.disabled = true;
+//   btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
+//   // myInput.textContent = new Date();
+
+//   days.textContent = '00';
+//   hours.textContent = '00';
+//   minutes.textContent = '00';
+//   seconds.textContent = '00';
+  
+//   clearInterval(timerId);
+
+//   btnStart.disabled = true;
+//   btnStart.style.backgroundColor = 'rgb(148, 233, 239)';
+// };
 
 
 
