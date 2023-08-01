@@ -86,6 +86,10 @@ btnStart.addEventListener('click', () => {
       myInput.disabled = false;
       btnReset.disabled = true;
       btnReset.style.backgroundColor = 'rgb(148, 233, 239)';
+      days.textContent = '00';
+      hours.textContent = '00';
+      minutes.textContent = '00';
+      seconds.textContent = '00';
     }
   }, 1000);
 });
