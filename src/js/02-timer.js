@@ -14,6 +14,7 @@ btnStart.disabled = true;
 const btnReset = document.createElement('button');
 btnStart.after(btnReset);
 btnReset.disabled = true;
+btnReset.style.backgroundColor = 'rgb(148, 233, 239)';
 
 let waitDate = null;
 
@@ -82,9 +83,12 @@ btnStart.addEventListener('click', () => {
 
     if (diff < 1000) {
       clearInterval(timerId)
+      myInput.disabled = false;
+      btnReset.disabled = true;
+      btnReset.style.backgroundColor = 'rgb(148, 233, 239)';
     }
   }, 1000);
-
+  
 });
 
 btnReset.addEventListener("click", () => {
