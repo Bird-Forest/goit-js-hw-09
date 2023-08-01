@@ -88,7 +88,6 @@ btnStart.addEventListener('click', () => {
       btnReset.style.backgroundColor = 'rgb(148, 233, 239)';
     }
   }, 1000);
-  
 });
 
 btnReset.addEventListener("click", () => {
